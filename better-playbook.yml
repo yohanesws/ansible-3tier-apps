@@ -1,0 +1,36 @@
+---
+- name: configuration of repo
+  hosts: all
+  become: true
+  tasks:
+  roles:
+    - { role: "./roles/basic" }
+
+- name: deploy haproxy to frontends
+  hosts: frontends
+  gather_facts: true
+  become: true
+  roles:
+    - { role: "./roles/haproxy" }
+
+
+- name: deploy tomcat to apps server
+  hosts: apps
+  gather_facts: false
+  become: true
+  roles:
+    - { role: "./roles/tomcat" }
+
+- name: deploy postgres
+  gather_facts: false
+  become: true
+  hosts: appdbs
+  roles:
+    - { role: "./roles/postgressql" }
+
+- name: deploy apache
+  hosts: apps
+  gather_facts: false
+  become: true
+  roles:
+    - { role: "./roles/apache" }
