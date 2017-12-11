@@ -4,32 +4,32 @@
   become: true
   tasks:
   roles:
-    - { role: "./roles/basic" }
+    - basic
 
 - name: deploy haproxy to frontends
   hosts: frontends
   gather_facts: true
   become: true
   roles:
-    - { role: "./roles/haproxy" }
+    - haproxy
 
 - name: deploy tomcat to apps server
   hosts: apps
   gather_facts: false
   become: true
   roles:
-    - { role: "./roles/tomcat" }
+    - tomcat
 
 - name: deploy postgres
   gather_facts: false
   become: true
   hosts: appdbs
   roles:
-    - { role: "./roles/postgressql" }
+    - postgressql
 
 - name: deploy apache
   hosts: apps
   gather_facts: false
   become: true
   roles:
-    - { role: "./roles/apache" }
+    - apache
