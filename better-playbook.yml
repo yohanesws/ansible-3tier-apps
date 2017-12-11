@@ -13,7 +13,6 @@
   roles:
     - { role: "./roles/haproxy" }
 
-
 - name: deploy tomcat to apps server
   hosts: apps
   gather_facts: false
