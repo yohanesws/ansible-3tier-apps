@@ -8,8 +8,8 @@
 
 - name: setup active-directory
   win_domain:
-    dns_domain_name: {{ ad_domain_name }}
-    safe_mode_password: {{ ad_safe_mode_password }}
+    dns_domain_name: "{{ ad_domain_name }}"
+    safe_mode_password: "{{ ad_safe_mode_password }}"
   register: restart
 
 - name: Reboot upon promotion
