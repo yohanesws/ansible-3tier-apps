@@ -19,4 +19,4 @@
   when: restart
 
 - name: check active directory
-  win_command: nltest /dclist:{{ ad_domain_name }}
+  win_shell: "nltest /dclist:{{ ad_domain_name }}"
