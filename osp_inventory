@@ -1,0 +1,2 @@
+[jumpbox]
+workstation-0a03.rhpds.opentlc.com ansible_ssh_user=ysono-redhat.com ansible_ssh_private_key_file=~/.ssh/id_rsa_opentlc
