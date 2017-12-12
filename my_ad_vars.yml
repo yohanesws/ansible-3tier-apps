@@ -1,2 +1,2 @@
 ---
-ad_domain_name: "ad1.${GUID}.example.opentlc.com"
+ad_domain_name: "ad1.{{GUID}}.example.opentlc.com"
