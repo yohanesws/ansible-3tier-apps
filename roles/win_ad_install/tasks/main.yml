@@ -18,12 +18,12 @@
     reboot_timeout: 3600
   when: restart
 
-- name: Debug domain
-  debug: "{{ ad_domain_name }}"
+# - name: Debug domain
+#   debug: "{{ ad_domain_name }}"
 
 - name: check active directory
   win_shell: "nltest /dclist:{{ ad_domain_name }}"
   register: result_check_ad
 
-- name: Debug check ad
-  debug: "{{ result_check_ad }}"
+# - name: Debug check ad
+#   debug: "{{ result_check_ad }}"
