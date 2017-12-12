@@ -1,7 +1,7 @@
 ---
 - name: configuration of Active Directory
   hosts: windows
-  tasks:
+  pre_tasks:
     - name: prepare variable
       include_vars:
         file: my_ad_vars.yml
