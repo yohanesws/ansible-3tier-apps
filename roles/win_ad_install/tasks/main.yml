@@ -1,0 +1,22 @@
+---
+- name: Install AD-Domain-Services feature
+  win_feature:
+    name: AD-Domain-Services
+    include_management_tools: yes
+    include_sub_features: yes
+    state: present
+
+- name: setup active-directory
+  win_domain:
+    dns_domain_name: {{ ad_domain_name }}
+    safe_mode_password: {{ ad_safe_mode_password }}
+  register: restart
+
+- name: Reboot upon promotion
+  win_reboot:
+    shutdown_timeout: 3600
+    reboot_timeout: 3600
+  when: restart
+
+- name: check active directory
+  raw: nltest /dclist:{{ ad_domain_name }}

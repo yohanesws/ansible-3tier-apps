@@ -2,7 +2,6 @@
 - name: configuration of repo
   hosts: all
   become: true
-  tasks:
   roles:
     - basic
 
