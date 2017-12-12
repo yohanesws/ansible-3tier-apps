@@ -1,14 +1,13 @@
 ---
-- name: Include vars of my_ad_vars.yml
-  include_vars:
-    file: my_ad_vars.yml
-
-- name: Display all variables/facts known for a host
-  debug:
-    var: hostvars[windows]
-    verbosity: 4
-
 - name: configuration of Active Directory
   hosts: windows
+  tasks:
+    - name: prepare variable
+      include_vars:
+        file: my_ad_vars.yml
+    - name: Display all variables/facts known for a host
+      debug:
+        var: hostvars[windows]
+        verbosity: 4
   roles:
     - win_ad_install
