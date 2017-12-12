@@ -1,8 +1,8 @@
 - hosts: jumpbox
   gather_facts: false
   vars:
-    webserver_name: web1-test
-    databaseserver_name: db1-test
+    webserver_name: web1
+    databaseserver_name: db1
     flavor_name: m2.small
     webserver_group: webservers
     database_group: databaseservers
@@ -12,7 +12,7 @@
     os_server:
       cloud: ospcloud
       name: "{{ webserver_name }}"
-      image: rhel-guest
+      image: rhel-test
       meta: "group={{ webserver_group }},deployment_name={{ deployment }}"
       flavor: "{{ flavor_name }}"
       security_groups: ICMP_and_SSH
