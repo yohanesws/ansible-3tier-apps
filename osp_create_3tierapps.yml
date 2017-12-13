@@ -49,7 +49,8 @@
       name: "{{ item.public_v4 }}"
       group: "{{ item.metadata.deployment_name }}"
      with_items: "{{result.ansible_facts.openstack_servers}}"
-
+   - debug: 
+      var: "{{hostvars}}"
 - hosts: dev
   gather_facts: false
   become: yes
