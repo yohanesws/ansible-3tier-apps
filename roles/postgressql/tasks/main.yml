@@ -7,12 +7,12 @@
 - name: Check if PostgreSQL database is initialized.
   stat:
     path: "/var/lib/pgsql/data/PG_VERSION"
-  register: pgdata_dir_version_mitzi
+  register: pg_dir_version
 - debug:
-    var: pgdata_dir_version_mitzi.stat.exists
+    var: pg_dir_version.stat.exists
 - name: initilize postgres
   command: postgresql-setup initdb
-  when: pgdata_dir_version_mitzi.stat.exists == False
+  when: pg_dir_version.stat.exists == False
 - name: enable postgresql at boot
   service:
     name: postgresql
