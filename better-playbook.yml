@@ -4,6 +4,9 @@
   become: true
   roles:
     - basic
+  tags:
+    - configure_repos
+    - tested
 
 - name: deploy haproxy to frontends
   hosts: frontends
@@ -11,6 +14,9 @@
   become: true
   roles:
     - haproxy
+  tags:
+    - configure_haproxy
+    - tested
 
 - name: deploy tomcat to apps server
   hosts: apps
@@ -18,6 +24,9 @@
   become: true
   roles:
     - tomcat
+  tags:
+    - configure_app-server
+    - tested
 
 - name: deploy postgres
   gather_facts: false
@@ -25,6 +34,8 @@
   hosts: appdbs
   roles:
     - postgressql
+   tags:
+    - configure_db
 
 - name: deploy apache
   hosts: apps
