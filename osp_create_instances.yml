@@ -12,7 +12,7 @@
     os_server:
       cloud: ospcloud
       name: "{{ webserver_name }}"
-      image: rhel-test
+      image: rhel-guest
       meta: "group={{ webserver_group }},deployment_name={{ deployment }}"
       flavor: "{{ flavor_name }}"
       security_groups: ICMP_and_SSH
@@ -40,3 +40,4 @@
     debug: var=webserverfloatingip.floating_ip.floating_ip_address
   - name: Show webserver private IP
     debug: var=webserverip.openstack.private_v4
+
