@@ -70,7 +70,7 @@
       remote_ip_prefix: 0.0.0.0/0
   - os_security_group_rule:
       cloud: ospcloud
-      security_group: ICMP_POSTGRES_and_SSH
+      security_group: ICMP_TOMCAT_and_SSH
       protocol: icmp
       remote_ip_prefix: 0.0.0.0/0
     tags:
