@@ -1,7 +1,7 @@
 - hosts: jumpbox
   gather_facts: false
   vars_files:
-    - ./threetier_vars.yml
+    - ./osp_create_3tierapps_vars.yml
   tasks:
   - name: Create a servers instance
     os_server:
@@ -10,7 +10,7 @@
       image: "{{ item.image }}"
       meta: "group={{ item.webserver_group }},deployment_name={{ item.deployment }}"
       flavor: "{{ item.flavor }}"
-      security_groups: ICMP_and_SSH
+      security_groups: "{{ item.security_groups }}"
       key_name: ansible_ssh
       nics:
       - net-name: int_network

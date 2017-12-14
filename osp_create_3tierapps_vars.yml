@@ -1,0 +1,6 @@
+---
+# vars file for osp 3tier application
+ servers:
+   - { name: 'haproxy1', webserver_group: 'lbserver', deployment: 'dev', image: 'rhel-guest', flavor: 'm2.small', security_groups: 'ICMP_and_SSH'}
+   - { name: 'tomcat1', webserver_group: 'appserver', deployment: 'dev', image: 'rhel-guest', flavor: 'm2.small', security_groups: 'ICMP_TOMCAT_and_SSH'}
+   - { name: 'db1', webserver_group: 'database', deployment: 'dev', image: 'rhel-guest', flavor: 'm2.small', security_groups: 'ICMP_POSTGRES_and_SSH'}
