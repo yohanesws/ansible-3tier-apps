@@ -43,11 +43,13 @@
      add_host:
       name: "{{ item.public_v4 }}"
       group: "{{ item.metadata.group }}"
+      timeout: 120
      with_items: "{{result.ansible_facts.openstack_servers}}"
    - name: Add host
      add_host:
       name: "{{ item.public_v4 }}"
       group: "{{ item.metadata.deployment_name }}"
+      timeout: 120
      with_items: "{{result.ansible_facts.openstack_servers}}"
 - hosts: dev
   gather_facts: false
