@@ -4,7 +4,7 @@
   pre_tasks:
     - name: prepare variable
       include_vars:
-        file: my_ad_vars.yml
+        file: win_ad_vars.yml
     - name: Display all variables/facts known for a host
       debug:
         var: hostvars[windows]
