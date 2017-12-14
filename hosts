@@ -17,17 +17,17 @@ appdbs
 
 [frontends]
 ## These are the frontends
-frontend1 ansible_host=frontend1."{{ GUID }}".internal ssh_host=ec2-52-76-33-252.ap-southeast-1.compute.amazonaws.com
+frontend1 ansible_host=frontend1."{{ GUID }}".internal ssh_host=ec2-52-76-33-252.ap-southeast-1.compute.amazonaws.com ansible_ssh_user=ysono-redhat.com
 
 
 [apps]
 ## These are the apps
-app1 ansible_host=app1."{{ GUID }}".internal ssh_host=ec2-13-228-56-233.ap-southeast-1.compute.amazonaws.com
-app2 ansible_host=app2."{{ GUID }}".internal ssh_host=ec2-52-220-244-235.ap-southeast-1.compute.amazonaws.com
+app1 ansible_host=app1."{{ GUID }}".internal ssh_host=ec2-13-228-56-233.ap-southeast-1.compute.amazonaws.com ansible_ssh_user=ysono-redhat.com
+app2 ansible_host=app2."{{ GUID }}".internal ssh_host=ec2-52-220-244-235.ap-southeast-1.compute.amazonaws.com ansible_ssh_user=ysono-redhat.com
 
 [appdbs]
 ## These are the appdbi(s)
-appdb1 ansible_host=appdb1."{{ GUID }}".internal ssh_host=ec2-52-221-66-118.ap-southeast-1.compute.amazonaws.com
+appdb1 ansible_host=appdb1."{{ GUID }}".internal ssh_host=ec2-52-221-66-118.ap-southeast-1.compute.amazonaws.com ansible_ssh_user=ysono-redhat.com
 
 [appserver]
 apps
