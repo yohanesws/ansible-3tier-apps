@@ -19,8 +19,6 @@ appdbs
 ## These are the frontends
 frontend1 ansible_host=frontend1."{{ GUID }}".internal ssh_host=ec2-52-76-33-252.ap-southeast-1.compute.amazonaws.com
 
-[appsserver]
-apps
 
 [apps]
 ## These are the apps
@@ -31,3 +29,5 @@ app2 ansible_host=app2."{{ GUID }}".internal ssh_host=ec2-52-220-244-235.ap-sout
 ## These are the appdbi(s)
 appdb1 ansible_host=appdb1."{{ GUID }}".internal ssh_host=ec2-52-221-66-118.ap-southeast-1.compute.amazonaws.com
 
+[appserver]
+apps

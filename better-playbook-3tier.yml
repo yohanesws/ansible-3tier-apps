@@ -19,7 +19,7 @@
     - tested
 
 - name: deploy tomcat to apps server
-  hosts: apps
+  hosts: appserver
   gather_facts: false
   become: true
   roles:
