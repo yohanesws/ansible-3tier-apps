@@ -49,6 +49,5 @@
 #   become: yes
 #   roles:
 #     - apache
-# - include: so-configuration.yaml
-# - include: fuse-installation.yaml
-- include: better-playbook-3tier.yaml
+
+- include: better-playbook-3tier.yml
