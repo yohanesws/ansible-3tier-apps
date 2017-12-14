@@ -1,0 +1,6 @@
+---
+## provisiong OpenStack Test environment
+- include: osp_create_network.yaml
+- include: osp_create_security.yaml
+- include: osp_create_flavor.yaml
+- include: osp_create_3tierapps.yaml

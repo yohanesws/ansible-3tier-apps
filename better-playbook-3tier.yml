@@ -1,6 +1,9 @@
 ---
 - name: configuration of repo
-  hosts: all
+  hosts: 
+    - lbserver
+    - appserver
+    - database
   become: true
   roles:
     - basic
@@ -9,7 +12,7 @@
     - tested
 
 - name: deploy haproxy to frontends
-  hosts: frontends
+  hosts: lbserver
   gather_facts: true
   become: true
   roles:
@@ -37,9 +40,20 @@
   tags:
     - configure_db
 
-- name: deploy apache
-  hosts: apps
+# - name: deploy apache
+#   hosts: webservers
+#   gather_facts: false
+#   become: true
+#   roles:
+#     - apache
+
+- name: verify
+  hosts: lbserver
   gather_facts: false
-  become: true
-  roles:
-    - apache
+  tasks:
+  - name: verify loadbalance web url
+    tags:
+      - verify
+    uri:
+      url: http://localhost
+      status_code: 200

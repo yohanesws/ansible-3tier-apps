@@ -1,0 +1,11 @@
+- hosts: jumpbox
+  gather_facts: false
+  vars_files:
+    - ./osp_create_3tierapps_vars.yml
+  tasks:
+  - name: Delete a servers instance
+    os_server:
+      cloud: ospcloud
+      name: "{{ item.name }}"
+      state: absent
+    with_items: "{{ servers }}"
