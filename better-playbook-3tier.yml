@@ -34,7 +34,7 @@
   hosts: appdbs
   roles:
     - postgressql
-   tags:
+  tags:
     - configure_db
 
 - name: deploy apache
