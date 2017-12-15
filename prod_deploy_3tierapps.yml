@@ -8,14 +8,11 @@
     aws_region: ap-southeast-1
     order_wait_seconds: 300
   gather_facts: false
-  become: true
   tasks:
   - name: order environment at opentlc
-    command: "{{ item}}"
-    with_items:
-      - "cd ~"
-      - "source ~/credential/credential.rc"
-      - "./order_svc.sh -c '{{ catalog_group }}' -i '{{ catalog_name }}' -t 1 -y"
+    command: "source ~/credential/credential.rc && ./order_svc.sh -c '{{ catalog_group }}' -i '{{ catalog_name }}' -t 1 -y"
+    become: yes
+    become_user: root
     register: "provision"
 
   - debug: var=provision
