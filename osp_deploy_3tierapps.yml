@@ -20,34 +20,5 @@
       group: "{{ item.metadata.deployment_name }}"
       timeout: 120
      with_items: "{{result.ansible_facts.openstack_servers}}"
-# - hosts: dev
-#   gather_facts: false
-#   become: yes
-#   roles:
-#     - basic
 
-# - hosts: lbserver
-#   gather_facts: false
-#   become: yes
-#   roles:
-#     - haproxy
-
-# - hosts: appserver
-#   gather_facts: false
-#   become: yes
-#   roles:
-#     - tomcat
-
-# - hosts: database
-#   gather_facts: false
-#   become: yes
-#   roles:
-#     - postgressql
-
-# - hosts: webservers
-#   gather_facts: false
-#   become: yes
-#   roles:
-#     - apache
-
-- include: better-playbook-3tier.yml
+- import_playbook: better-playbook-3tier.yml
