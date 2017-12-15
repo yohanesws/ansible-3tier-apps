@@ -18,7 +18,7 @@
       become: true
       become_user: ec2-user
       template:
-        src: credential.rc.j2
+        src: templates/credential.rc.j2
         dest: ~/credential/credential.rc
         mode: 0644
     - name: install jq
