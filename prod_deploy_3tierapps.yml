@@ -10,7 +10,7 @@
   gather_facts: false
   tasks:
   - name: order environment at opentlc
-    command: "source ~/credential/credential.rc && ./order_svc.sh -c '{{ catalog_group }}' -i '{{ catalog_name }}' -t 1 -y"
+    command: 'source ~/credential/credential.rc && ./order_svc.sh -c "{{ catalog_group }}" -i "{{ catalog_name }}" -t 1 -y'
     become: yes
     become_user: root
     register: "provision"
