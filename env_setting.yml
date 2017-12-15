@@ -26,6 +26,7 @@
       - "wget http://www.opentlc.com/download/ansible_bootcamp/scripts/order_svc.sh"
       - "wget http://www.opentlc.com/download/ansible_bootcamp/scripts/jq-linux64 -O ~/bin/jq"
       - "chmod +x order_svc.sh ~/bin/jq"
+      - "pip install boto"
     - name: setting opentlc credential
       template:
         src: credential.rc.j2
