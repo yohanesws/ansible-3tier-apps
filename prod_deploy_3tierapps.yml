@@ -6,6 +6,7 @@
     catalog_name: "Three Tier Application"
     tag_instance_filter: "three-tier-app-ysono*"
     aws_region: ap-southeast-1
+    order_wait_seconds: 300
   gather_facts: false
   become: true
   tasks:
@@ -14,6 +15,12 @@
     register: "provision"
 
   - debug: var=provision
+
+  - name: "wait for {{ order_wait_seconds }} seconds for order to be provisioned"
+    tags:
+      - order_instances
+    wait_for:
+      timeout: "{{ order_wait_seconds }}"
 
   - name: Gather environment facts
     tags:
