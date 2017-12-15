@@ -20,8 +20,8 @@
     - name: setting opentlc script
       command: "{{ item }}"
       with_items:
-      - "mkdir ~/bin"
-      - "mkdir ~/credential"
+      - "mkdir -p ~/bin"
+      - "mkdir -p ~/credential"
       - "wget http://www.opentlc.com/download/ansible_bootcamp/scripts/common.sh"
       - "wget http://www.opentlc.com/download/ansible_bootcamp/scripts/order_svc.sh"
       - "wget http://www.opentlc.com/download/ansible_bootcamp/scripts/jq-linux64 -O ~/bin/jq"
