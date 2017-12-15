@@ -17,16 +17,17 @@
     - configure_opentlc
     - tested
   tasks:
+    - name: setting opentlc script
+      command: "{{ item }}"
+      with_items:
+      - "mkdir ~/bin"
+      - "mkdir ~/credential"
+      - "wget http://www.opentlc.com/download/ansible_bootcamp/scripts/common.sh"
+      - "wget http://www.opentlc.com/download/ansible_bootcamp/scripts/order_svc.sh"
+      - "wget http://www.opentlc.com/download/ansible_bootcamp/scripts/jq-linux64 -O ~/bin/jq"
+      - "chmod +x order_svc.sh ~/bin/jq"
     - name: setting opentlc credential
       template:
         src: credential.rc.j2
         dest: ~/credential/credential.rc
         mode: 0644
-    - name: setting opentlc script
-      command: "{{ item }}"
-      with_items:
-      - "mkdir ~/bin"
-      - "wget http://www.opentlc.com/download/ansible_bootcamp/scripts/common.sh"
-      - "wget http://www.opentlc.com/download/ansible_bootcamp/scripts/order_svc.sh"
-      - "wget http://www.opentlc.com/download/ansible_bootcamp/scripts/jq-linux64 -O ~/bin/jq"
-      - "chmod +x order_svc.sh ~/bin/jq"

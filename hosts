@@ -18,7 +18,7 @@ bastion
 
 [bastion]
 ## These are the bastion
-bastion1 ansible_host=bastion.${GUID}.example.opentlc.com ansible_ssh_user=ec2-user
+bastion1 ansible_host=bastion.{{ GUID }}.example.opentlc.com ansible_ssh_user=ec2-user
 
 [frontends]
 # these are the frontends
