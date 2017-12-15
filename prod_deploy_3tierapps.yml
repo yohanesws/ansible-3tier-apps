@@ -9,7 +9,7 @@
   gather_facts: false
   tasks:
   - name: order environment at opentlc
-    command: "source credential.rc ; ./order_svc.sh -c 'OPENTLC Cloud Infrastructure Labs' -i 'DEV 3 Tier App' -t 1"
+    command: "source ~/bin/credential.rc; ./order_svc.sh -c {{ catalog_group }} -i {{ catalog_name }} -t -1 -y"
     register: "provision"
 
   - debug: var=provision
