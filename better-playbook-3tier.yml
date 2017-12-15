@@ -1,9 +1,9 @@
 ---
 - name: configuration of repo
   hosts: 
-    - lbserver
-    - appserver
-    - database
+    - frontends
+    - apps
+    - appdbs
   become: true
   roles:
     - basic
@@ -14,7 +14,7 @@
   delay: 30
 
 - name: deploy tomcat to apps server
-  hosts: appserver
+  hosts: apps
   gather_facts: false
   become: true
   roles:
@@ -40,7 +40,7 @@
 #     - apache
 
 - name: deploy haproxy to frontends
-  hosts: lbserver
+  hosts: frontends
   gather_facts: true
   become: true
   roles:
@@ -50,7 +50,7 @@
     - tested
 
 - name: verify
-  hosts: lbserver
+  hosts: frontends
   gather_facts: false
   become: true
   tasks:
