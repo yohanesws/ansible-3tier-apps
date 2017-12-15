@@ -7,6 +7,7 @@
     tag_instance_filter: "three-tier-app-ysono*"
     aws_region: ap-southeast-1
   gather_facts: false
+  become: true
   tasks:
   - name: order environment at opentlc
     command: "source ~/bin/credential.rc; ./order_svc.sh -c {{ catalog_group }} -i {{ catalog_name }} -t -1 -y"
