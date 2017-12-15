@@ -19,6 +19,8 @@
   tasks:
     - name: setting opentlc script
       command: "{{ item }}"
+      become: true
+      become_user: ec2-user
       with_items:
       - "mkdir -p ~/bin"
       - "mkdir -p ~/credential"
@@ -26,9 +28,14 @@
       - "wget http://www.opentlc.com/download/ansible_bootcamp/scripts/order_svc.sh -O ~/order_svc.sh"
       - "wget http://www.opentlc.com/download/ansible_bootcamp/scripts/jq-linux64 -O ~/bin/jq"
       - "chmod +x ~/order_svc.sh ~/bin/jq ~/common.sh"
-      - "pip install boto"
     - name: setting opentlc credential
+      become: true
+      become_user: ec2-user
       template:
         src: credential.rc.j2
         dest: ~/credential/credential.rc
         mode: 0644
+    - name: setting opentlc credential
+      command: "{{ item }}"
+      with_items:
+      - "pip install boto"
