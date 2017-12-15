@@ -6,54 +6,61 @@
     catalog_name: "Three Tier Application"
     tag_instance_filter: "three-tier-app-ysono*"
     aws_region: ap-southeast-1
-    order_wait_seconds: 300
+    order_wait_seconds: 60
   gather_facts: false
   tasks:
-  - name: order environment at opentlc
-    command: 'source ~/credential/credential.rc && ./order_svc.sh -c "{{ catalog_group }}" -i "{{ catalog_name }}" -t 1 -y'
-    become: yes
-    become_user: root
-    register: "provision"
+  # - name: order environment at opentlc
+  #   become: true
+  #   become_user: ec2-user
+  #   shell: "source ~/credential/credential.rc; source ./common.sh; ./order_svc.sh -c '{{ catalog_group }}' -i '{{ catalog_name }}' -t 1 -y"
+  #   args:
+  #     chdir: /home/ec2-user
+  #     executable: /bin/bash
+  #   register: "provision"
 
-  - debug: var=provision
+  # - debug: var=provision
 
   - name: "wait for {{ order_wait_seconds }} seconds for order to be provisioned"
     tags:
       - order_instances
     wait_for:
       timeout: "{{ order_wait_seconds }}"
-
+      
   - name: Gather environment facts
     tags:
       - dynamic_inventory
-    ec2_remote_facts:
+    ec2_instance_facts:
       aws_access_key: "{{ aws_access_key_id }}"
       aws_secret_key: "{{ aws_secret_access_key }}"
-      region: "{{ aws_region | default(region) | default('ap-southeast-1')}}"
+      region: "{{ aws_region | default(region) | default('us-east-1')}}"
       filters:
         instance-state-name: running
         "tag:instance_filter": "{{ tag_instance_filter }}"
-    register: ec2_facts
+    register: "instance_facts"
+    until: "instance_facts.instances|count > 0"
+    retries: 5
+    delay: 120
+
 
   - name: debug ec2 facts
     tags:
       - create_inventory
-    debug: var=ec2_facts
+    debug: var=instance_facts
 
-  - name: Add host to metadata group
-    #  tags: dynamic_inventory
-    add_host:
-      name: "{{ item.public_v4 }}"
-      group: "{{ item.metadata.group }}"
-    with_items: "{{ec2_facts.ansible_facts.openstack_servers}}"
+  # - name: Add host to metadata group
+  #   #  tags: dynamic_inventory
+  #   add_host:
+  #     name: "{{ item.public_v4 }}"
+  #     group: "{{ item.metadata.group }}"
+  #   with_items: "{{ec2.ansible_facts.openstack_servers}}"
 
-  - name: Add host to deployment name group
-  #  tags: dynamic_inventory
-    add_host:
-      name: "{{ item.public_v4 }}"
-      group: "{{ item.metadata.deployment_name }}"
-    with_items: "{{ec2_facts.ansible_facts.openstack_servers}}"
+  # - name: Add host to deployment name group
+  # #  tags: dynamic_inventory
+  #   add_host:
+  #     name: "{{ item.public_v4 }}"
+  #     group: "{{ item.metadata.deployment_name }}"
+  #   with_items: "{{ec2.ansible_facts.openstack_servers}}"
 
-  - debug: var=hostvars
+  # - debug: var=hostvars
 
 # - import_playbook: better-playbook-3tier.yml
