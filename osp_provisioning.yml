@@ -3,4 +3,4 @@
 - import_playbook: osp_provisioning/osp_create_network.yml
 - import_playbook: osp_provisioning/osp_create_security.yml
 - import_playbook: osp_provisioning/osp_create_flavor.yml
-- import_playbook: osp_provisioning/osp_create_3tierapps.yml
+- import_playbook: osp_create_3tierapps.yml
