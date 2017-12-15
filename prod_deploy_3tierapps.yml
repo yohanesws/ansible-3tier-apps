@@ -22,8 +22,8 @@
       aws_secret_key: "{{ aws_secret_access_key }}"
       region: "{{ aws_region | default(region) | default('ap-southeast-1')}}"
       filters:
-          instance-state-name: running
-          tag_instance_filter: "{{tag_instance_filter}}"
+        instance-state-name: running
+        "tag:instance_filter": "{{ tag_instance_filter }}"
     register: ec2_facts
 
   - name: debug ec2 facts
