@@ -10,8 +10,6 @@
   tags:
     - configure_repos
     - tested
-  retries: 5
-  delay: 30
 
 - name: deploy tomcat to apps server
   hosts: apps
