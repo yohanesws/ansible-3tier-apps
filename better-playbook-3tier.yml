@@ -10,16 +10,8 @@
   tags:
     - configure_repos
     - tested
-
-- name: deploy haproxy to frontends
-  hosts: lbserver
-  gather_facts: true
-  become: true
-  roles:
-    - haproxy
-  tags:
-    - configure_haproxy
-    - tested
+  retries: 5
+  delay: 30
 
 - name: deploy tomcat to apps server
   hosts: appserver
@@ -47,9 +39,20 @@
 #   roles:
 #     - apache
 
+- name: deploy haproxy to frontends
+  hosts: lbserver
+  gather_facts: true
+  become: true
+  roles:
+    - haproxy
+  tags:
+    - configure_haproxy
+    - tested
+
 - name: verify
   hosts: lbserver
   gather_facts: false
+  become: true
   tasks:
   - name: verify loadbalance web url
     tags:
@@ -57,3 +60,5 @@
     uri:
       url: http://localhost
       status_code: 200
+    retries: 5
+    delay: 30

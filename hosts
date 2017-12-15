@@ -14,11 +14,16 @@ ansible_ssh_user=ec2-user
 frontends
 apps
 appdbs
+bastion
+tower
+
+[bastion]
+## These are the bastion
+bastion1 ansible_host=bastion.${GUID}.example.opentlc.com ansible_ssh_user=ec2-user
 
 [frontends]
-## These are the frontends
+# these are the frontends
 frontend1 ansible_host=frontend1."{{ GUID }}".example.opentlc.com ansible_ssh_user=ec2-user
-
 
 [apps]
 ## These are the apps
