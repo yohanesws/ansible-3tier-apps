@@ -5,7 +5,7 @@
     - name: Add bastion host to metadata group
       #  tags: dynamic_inventory
       add_host:
-        name: " bastion.{{ guid }}.example.opentlc.com"
+        name: "bastion.{{ guid }}.example.opentlc.com"
         groups: "prod-bastion"
 - name: Deploy three tier to production
   hosts: prod-bastion
@@ -16,7 +16,7 @@
         url: https://raw.githubusercontent.com/yohanesws/ansible-3tier-apps/master/better-playbook-3tier.yml
         dest: /root/better-playbook-3tier.yml
     - name: running ansible on prod bastion
-      shell: "ansible-playbook better-playbook-3tier.yml -e "GUID={{ guid }}""
+      shell: "ansible-playbook better-playbook-3tier.yml -e 'GUID={{ guid }}'"
       args:
         chdir: /root
         executable: /bin/bash
