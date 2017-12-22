@@ -1,6 +1,6 @@
 ---
 - name: Add production bastion
-  hosts: localhost
+  hosts: bastion
   tasks:
     - name: Add bastion host to metadata group
       #  tags: dynamic_inventory
