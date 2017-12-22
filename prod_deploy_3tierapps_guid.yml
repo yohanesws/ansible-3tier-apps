@@ -6,6 +6,8 @@
       #  tags: dynamic_inventory
       add_host:
         name: "bastion.{{ guid }}.example.opentlc.com"
+        ansible_ssh_host: "bastion.{{ guid }}.example.opentlc.com"
+        ansible_ssh_user: "ysono-redhat.com"
         groups: "prod-bastion"
 - name: Deploy three tier to production
   hosts: prod-bastion
