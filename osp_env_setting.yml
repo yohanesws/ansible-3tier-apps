@@ -1,0 +1,58 @@
+---
+- hosts: jumpbox
+  become: true
+  tags:
+    - configure_osp
+    - tested
+  tasks:
+    - name: download openstack.pub
+      become_user: root
+      get_url:
+        url: http://www.opentlc.com/download/ansible_bootcamp/openstack_keys/openstack.pub
+        dest: /root/openstack.pub
+    - name: download epel-release-latest-7
+      become_user: root
+      get_url:
+        url: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+        dest: /root/epel-release-latest-7.noarch.rpm
+    - name: configuring osp at jumphost
+      command: "{{ item }}"
+      become_user: root
+      with_items:
+      - "scp ctrl-{{ GUID }}.rhpds.opentlc.com:/etc/yum.repos.d/open.repo /etc/yum.repos.d/open.repo"
+      - "scp ctrl-{{ GUID }}.rhpds.opentlc.com:/root/keystonerc_admin /root/"
+      - "cat /root/openstack.pub  >> /home/cloud-user/.ssh/authorized_keys"
+      - "yum -y install 'ls *epel*.rpm'"
+    - name: install osp client
+      yum:
+        name: "{{ item }}"
+        state: latest
+      with_items:
+      - gcc
+      - python
+      - python-devel
+      - python-pip
+      - python-openstackclient
+    - name: install shade
+      command: "{{ item }}"
+      with_items:
+      - "pip install shade"
+      - "pip install ansible --upgrade"
+    - name: setting cloud.yaml
+      become_user: root
+      template:
+        src: templates/clouds.yaml.j2
+        dest: /etc/openstack/clouds.yaml
+        mode: 0644
+    - name: download RHEL image
+      get_url:
+        url: http://www.opentlc.com/download/osp_advanced_networking/rhel-guest-image-7.2-20151102.0.x86_64.qcow2
+        dest: /root/rhel-guest-image-7.2-20151102.0.x86_64.qcow2
+    - os_image:
+        cloud: ospcloud
+        name: rhel-guest
+        container_format: bare
+        disk_format: qcow2
+        state: present
+        filename: /root/rhel-guest-image-7.2-20151102.0.x86_64.qcow2
+        

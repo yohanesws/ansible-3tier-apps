@@ -11,6 +11,10 @@ Provisionig to AWS and Deploy 3-tier --> prod_deploy_3tierapps.yml
 
 ### Special Mention
 
+prepare your jumphost to communicate with OSP
+
+osp_env_setting.yml
+
 prepare your bastion to talk to OpenTLC and AWS ;)
 
 env_setting.yml
